@@ -3,4 +3,4 @@
 - Karen Shekyan
 - Gabriel Thompson 
 - Sadi Nirloy
-- Brian 
+- Brian Wang
