@@ -15,3 +15,7 @@ deal with it
 8:50 Karen Shekyan
   - Made draw.html
   - Made a canvas where the user can draw via mouse (js stuff)
+
+16:45 Brian Wang
+  - Provided credit and link to Alanine on use of the pre-provided API code 
+  

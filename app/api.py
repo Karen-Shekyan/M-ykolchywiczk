@@ -1,4 +1,6 @@
 #BE CAREFUL WITH REQUESTS! THEY SPEND REAL MONEY!!!!
+#Code provided by Alanine for use of integrating the Astica Cognitive API into third party code
+#https://github.com/alanine/astica-cognitive-api
 
 import requests
 import json
