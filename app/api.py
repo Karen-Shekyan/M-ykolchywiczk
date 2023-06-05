@@ -1,4 +1,6 @@
 #BE CAREFUL WITH REQUESTS! THEY SPEND REAL MONEY!!!!
+#Code provided by Alanine for use of integrating the Astica Cognitive API into third party code
+#https://github.com/alanine/astica-cognitive-api
 
 import requests
 import json
@@ -38,8 +40,9 @@ def gen_prompt(inputImg):
     THEY WILL DRAIN THE ACCOUNT FASTER THAN I DO MY JUGS OF MILK
     DO NOT USE GPT
     I BEG YOU
+    actually gonna use gpt~
     '''
-    asticaAPI_visionParams = 'description' # comma separated options; leave blank for all; note "gpt" and "gpt_detailed" are slow.
+    asticaAPI_visionParams = 'gpt' # comma separated options; leave blank for all; note "gpt" and "gpt_detailed" are slow.
     '''
         '1.0_full' supported options:
             description
