@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+
+</body>
+
+<div id="asking">
+<form>
+    What room do you want to join? <br>
+    <input type="text" id="roomcode" name="roomcode" required><br>
+    <input type="button" value="Join" onclick="nextAsk(this.form)">
+</form>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf-8">
+    function nextAsk(form){
+        socket = io();
+        room = form.roomcode.value;
+        socket.emit('roomRes', room);
+        newForm = document.getElementById("asking");
+        newForm.innerHTML = '<form  action="/room" method="post"> \
+    What do you want to be called?<br> \
+    <input type="text" id="username" name="username" required> \
+    <br> \
+    <input type="submit" class="Join" name="joining"> \
+</form>'
+    }
+
+</script>
+
+</html>
