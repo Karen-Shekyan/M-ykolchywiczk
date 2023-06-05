@@ -15,3 +15,8 @@ deal with it
 8:50 Karen Shekyan
   - Made draw.html
   - Made a canvas where the user can draw via mouse (js stuff)
+
+= 06/05/23 =
+9:00 Karen Shekyan
+  - Rename draw.html to game.html and made it more functional
+  - Massively overengineered a COLOR PALETTE
