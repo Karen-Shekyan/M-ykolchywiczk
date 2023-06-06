@@ -1,9 +1,10 @@
 // wait for the content of the window element to load, then performs the operations.
 window.addEventListener("load", ()=>{
-
 	resize(); // Resizes the canvas once the window loads
   resizeC();
   loadColors();
+  ctx.rect(0, 0, 750, 480);
+
 	document.addEventListener("mousedown", startPainting);
   document.addEventListener("mousedown", sketch);
   document.addEventListener("mousedown", selectColor);
@@ -161,9 +162,7 @@ document.getElementById("done").addEventListener("click", submit);
 
 function submit() {
   const myImageData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
-  // console.log(myImageData.data);
-
-  document.write(myImageData.data);
+  
 }
 
 // ONE DIMENSIONAL LIST THAT IS width * height * 4 long
