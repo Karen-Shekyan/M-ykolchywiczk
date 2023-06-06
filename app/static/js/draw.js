@@ -21,9 +21,20 @@ const ctx = canvas.getContext("2d");
 ctx.strokeStyle = "black";
 
 function resize() {
-  ctx.canvas.width = window.innerWidth * 0.5;
-  ctx.canvas.height = window.innerHeight * 0.7;
-};
+// create a temporary canvas obj to cache the pixel data //
+  let temp_cnvs = document.createElement('canvas');
+  let temp_ctx = temp_cnvs.getContext('2d');
+// set it to the new width & height and draw the current canvas data into it //
+  temp_cnvs.width = ctx.canvas.width;
+  temp_cnvs.height = ctx.canvas.height;
+  temp_ctx.fillStyle = "white";  // the original canvas's background color
+  temp_ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+  temp_ctx.drawImage(canvas, 0, 0);
+// resize & clear the original canvas and copy back in the cached pixel data //
+  ctx.canvas.width = 750;
+  ctx.canvas.height = 480;
+  ctx.drawImage(temp_cnvs, 0, 0);
+}
 
 // Stores the initial position of the cursor
 let coord = {x:0 , y:0};
@@ -53,9 +64,12 @@ function sketch(event) {
     return;
   }
 
+  if (ctx.lineWidth != 20) {
+    ctx.lineWidth = 5;
+  }
+
   ctx.beginPath();
 
-  ctx.lineWidth = 5;
   ctx.lineCap = "round";
 
   ctx.moveTo(coord.x, coord.y);
@@ -119,19 +133,38 @@ function selectColor(event) {
   for (let i = 0; i < 7; i++) {
     if (coordC.x >= space && coordC.x <= space + 0.03 * window.innerWidth && coordC.y >= i*0.043*window.innerWidth + space && coordC.y <= i*0.043*window.innerWidth + space + 0.03 * window.innerWidth) {
       ctx.strokeStyle = validColors[j];
+
+      if (j == 0) {
+        ctx.lineWidth = 20;
+      } else {
+        ctx.lineWidth = 5;
+      }
+
       break;
     }
     j++;
 
     if (coordC.x >= 0.057 * window.innerWidth && coordC.x <= 0.057 * window.innerWidth + 0.03 * window.innerWidth && coordC.y >= i*0.043*window.innerWidth + space && coordC.y <= i*0.043*window.innerWidth + space + 0.03 * window.innerWidth) {
-      ctx.strokeStyle = validColors[j];
+      if (j == 1) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      } else {
+        ctx.strokeStyle = validColors[j];
+        ctx.lineWidth = 5;
+      }
       break;
     }
     j++
   }
 }
 
-const myImageData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
-console.log(myImageData.data);
+document.getElementById("done").addEventListener("click", submit);
+
+function submit() {
+  const myImageData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
+  // console.log(myImageData.data);
+
+  document.write(myImageData.data);
+}
+
 // ONE DIMENSIONAL LIST THAT IS width * height * 4 long
 // redIndex, greenIndex, blueIndex, alphaIndex
