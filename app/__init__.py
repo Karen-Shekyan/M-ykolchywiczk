@@ -5,23 +5,30 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
 
-@app.route("/join")
+@app.route("/")
 def home():
-    return render_template("join.html")
+    return render_template("home.html")
 
-@socketio.on('roomRes')
-def respond(room):
-    print(room)
-    join_room(room)
-    emit('info', data)
+@app.route("/create", methods=["POST", "GET"])
+def creation():
+    return render_template("create.html")
+
+@app.route("/join", methods=["POST", "GET"])
+def joining():
+    return render_template("join.html")
 
 @app.route("/room", methods=["POST", "GET"])
 def roomed():
     return render_template("room.html")
 
-@app.route("/game", methods=["POST", "GET"])
-def game():
-    return render_template("game.html")
+
+
+@socketio.on('roomRes')
+def respond(room):
+    print(request.sid)
+    print(room)
+    join_room(room)
+    emit('info', room)
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    socketio.run(app)
