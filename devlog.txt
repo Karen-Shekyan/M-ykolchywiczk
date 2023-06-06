@@ -1,8 +1,28 @@
-unformatted Devlog
-deal with it
+M'ykolchywiczk
+Gabriel Thompson
+Brian Wang
+Sadi Nirloy
+Karen Shekyan
+pd 8
+---------------------
+P05 -- ???
 
-= 06/03/23 =
-20:14 Brian Wang
+Description:
+...
+
+ ______   ______   __   __   __       ______   _______
+/_____/\ /_____/\ /_/\ /_/\ /_/\     /_____/\ /______/\
+\:::_ \ \\::::_\/_\:\ \\ \ \\:\ \    \:::_ \ \\::::__\/__
+ \:\ \ \ \\:\/___/\\:\ \\ \ \\:\ \    \:\ \ \ \\:\ /____/\
+  \:\ \ \ \\::___\/_\:\_/.:\ \\:\ \____\:\ \ \ \\:\\_  _\/
+   \:\/.:| |\:\____/\\ ..::/ / \:\/___/\\:\_\ \ \\:\_\ \ \
+    \____/_/ \_____\/ \___/_(   \_____\/ \_____\/ \_____\/
+==============================================================
+||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+
+brianW -- 2023-06-03 8:10 PM
+--------------------------------------------------------------
   - used some API code provided by Astica for use of Astica Vision
   - tweaked code paramters to return desired prompt
   - i added 10 bucks to my account so please do not spam requests to astica they do take money
@@ -10,29 +30,37 @@ deal with it
   - and do not use any other settings they will go from double the price per request to like 100x the price
   - seriously this stuff is addicting
   - do i need to like credit the astica creator on the code he provided for asticavision use? No liscense information is provided
+==============================================================
 
-= 06/05/23 =
-
-8:50 Karen Shekyan
+karenS -- 2023-06-05 8:50 AM
+--------------------------------------------------------------
   - Made draw.html
   - Made a canvas where the user can draw via mouse (js stuff)
 
-16:45 Brian Wang
+brianW -- 2023-06-05 4:50 PM
+--------------------------------------------------------------
   - Provided credit and link to Alanine on use of the pre-provided API code
 
-18:13 Brian Wang
+brianW -- 2023-06-05 6:10 PM
+--------------------------------------------------------------
   - Implemented image manipulation under temp_files.py due to the current problems within __init__.py
   - temp_files.py now allows for the creation of a directory from a room code
   - Also allows for the insertion of an image from an rgb 2d-array image into a png image into specific directory
   - Switched api.py's mode to GPT, now spending $18 per 1000 requests, meaning there should be about 500 requests, or 100 games
   - added keys to .gitignore
 
-21:00 Karen Shekyan
+karenS -- 2023-06-05 9:00 PM
+--------------------------------------------------------------
   - Rename draw.html to game.html and made it more functional
   - Massively overengineered a COLOR PALETTE
+==============================================================
 
-= 06/06/23 =
-
-10:10 Karen Shekyan
+karenS -- 2023-06-06 10:10 AM
+--------------------------------------------------------------
   - Made basic app
   - Added basic styling to landing page
+
+karenS -- 2023-06-06 3:00 PM
+--------------------------------------------------------------
+  - Fixed bugs in game.html
+  - Prepared canvas drawing to be socketed to Python
