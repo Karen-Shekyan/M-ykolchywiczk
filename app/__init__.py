@@ -5,6 +5,10 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
 
+@app.route("/")
+def landing():
+    return render_template("landing.html")
+
 @app.route("/join")
 def home():
     return render_template("join.html")
