@@ -11,6 +11,8 @@ deal with it
   - seriously this stuff is addicting
   - do i need to like credit the astica creator on the code he provided for asticavision use? No liscense information is provided
 
+= 06/05/23 =
+
 8:50 Karen Shekyan
   - Made draw.html
   - Made a canvas where the user can draw via mouse (js stuff)
@@ -28,3 +30,9 @@ deal with it
 21:00 Karen Shekyan
   - Rename draw.html to game.html and made it more functional
   - Massively overengineered a COLOR PALETTE
+
+= 06/06/23 =
+
+10:10 Karen Shekyan
+  - Made basic app
+  - Added basic styling to landing page
