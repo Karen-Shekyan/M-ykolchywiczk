@@ -19,6 +19,10 @@ def joining():
 
 @app.route("/room", methods=["POST", "GET"])
 def roomed():
+    uName = request.form["username"]
+    rNum = request.form["roomnumber"]
+    print(uName)
+    print(rNum)
     return render_template("room.html")
 
 
