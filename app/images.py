@@ -52,7 +52,7 @@ def insert_img(rc, img, tc):
     Image.fromarray(numpy.array(matrifyFromString(img)).astype(numpy.uint8), mode="RGBA").save(os.path.join("img", rc, tc + ".png"))
 
 
-new_dir("boo")
+#new_dir("boo")
 '''
 test0 = [
     [0., 0., 0., 200., 200.],
@@ -106,9 +106,12 @@ insert_img("boo", test4, "4")
 #print(test6)
 #insert_img("boo", test6, "6")
 
-with open("img/test.txt", "r") as file:
-    ex = file.read().strip()
-#raw = matrifyFromString(ex)
-#print(raw)
-#test7 = numpy.asarray([raw])
-insert_img("boo", ex, "7")
+if __name__ == '__main__':
+    with open("img/test.txt", "r") as file:
+        ex = file.read().strip()
+        #raw = matrifyFromString(ex)
+        #print(raw)
+        #test7 = numpy.asarray([raw])
+        insert_img("boo", ex, "7")
+    
+        file.close()
