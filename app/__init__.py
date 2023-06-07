@@ -27,5 +27,9 @@ def roomed():
 def game():
     return render_template("game.html")
 
+@app.route("/end", methods=["POST", "GET"])
+def end():
+    return render_template("end.html")
+
 if __name__ == '__main__':
     socketio.run(app, debug=True)
