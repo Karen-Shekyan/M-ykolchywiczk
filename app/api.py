@@ -105,7 +105,7 @@ def gen_prompt(inputImg):
             if 'objects' in asticaAPI_result:
                 print('=================')
                 print('Objects:', asticaAPI_result['objects'])
-        ret = asticaAPI_result['caption']['text']
+        ret = asticaAPI_result['caption_GPTS']
     else:
         print('Invalid response')
     return ret
@@ -126,4 +126,5 @@ def gen_prompt(inputImg):
 #gen_prompt("img/test13.jpg")
 
 #4-8 are PNGS!!!!! 
-print(gen_prompt("img/test7.png"))
+if __name__ == '__main__':
+    print(gen_prompt("img/test7.png"))
