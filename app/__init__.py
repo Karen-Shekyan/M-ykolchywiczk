@@ -6,8 +6,8 @@ app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
 
 @app.route("/")
-def home():
-    return render_template("home.html")
+def landing():
+    return render_template("landing.html")
 
 @app.route("/create", methods=["POST", "GET"])
 def creation():
@@ -31,6 +31,10 @@ def userProcess(uName, rCode):
     print(request.sid)
     join_room(rCode)
     emit("approvedUser", (uName, rCode))
+
+@app.route("/end", methods=["POST", "GET"])
+def end():
+    return render_template("end.html")
 
 if __name__ == '__main__':
     socketio.run(app)

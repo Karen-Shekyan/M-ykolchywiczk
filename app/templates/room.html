@@ -26,12 +26,8 @@ Loading...
 
     socket.emit("userInfo", uName, rCode);
     socket.on("approvedUser", (appUName, appRCode) => {
-	console.log(appUName)
-	console.log(appRCode)
         uName = appUName;
         rCode = appRCode;
-        console.log(uName)
-        console.log(rCode)
         document.getElementById("username").innerHTML = appUName;
         document.getElementById("roomnumber").innerHTML = appRCode;
     });
