@@ -45,10 +45,11 @@ def matrifyFromString(inp):
     return ret
 
 
-#Takes a room code, array-ified image, and turn count (PLACEHOLDER NAME)
+#Takes a room code, image in 1d array format from JS, and turn count (PLACEHOLDER NAME)
 #Creates a standard version of array-ified image and inserts it into the corresponding folder for the specified room code
 def insert_img(rc, img, tc):
-    Image.fromarray(numpy.array(img).astype(numpy.uint8), mode="RGBA").save(os.path.join("img", rc, tc + ".png"))
+    #Change matrifyFromSTring to matrifiy if not deailng with strings
+    Image.fromarray(numpy.array(matrifyFromString(img)).astype(numpy.uint8), mode="RGBA").save(os.path.join("img", rc, tc + ".png"))
 
 
 new_dir("boo")
@@ -96,18 +97,18 @@ test4 = [
 ]
 insert_img("boo", test4, "4")
 '''
-eximg0 = Image.open('img/test8.png')
-test5 = numpy.asarray(eximg0.convert(mode="RGBA"))
-insert_img("boo", test5, "5")
+#eximg0 = Image.open('img/test8.png')
+#test5 = numpy.asarray(eximg0.convert(mode="RGBA"))
+#insert_img("boo", test5, "5")
 
-eximg1 = Image.open('img/test7.png')
-test6 = numpy.asarray(eximg1.convert(mode="RGBA"))
-print(test6)
-insert_img("boo", test6, "6")
+#eximg1 = Image.open('img/test7.png')
+#test6 = numpy.asarray(eximg1.convert(mode="RGBA"))
+#print(test6)
+#insert_img("boo", test6, "6")
 
 with open("img/test.txt", "r") as file:
     ex = file.read().strip()
-raw = matrifyFromString(ex)
-print(raw)
+#raw = matrifyFromString(ex)
+#print(raw)
 #test7 = numpy.asarray([raw])
-insert_img("boo", raw, "7")
+insert_img("boo", ex, "7")

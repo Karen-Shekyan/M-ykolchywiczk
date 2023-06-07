@@ -112,7 +112,7 @@ def gen_prompt(inputImg):
 
 #gen_prompt("img/test0.jpg")
 #gen_prompt("img/test1.jpg")
-#gen_prompt("img/test2.jpg")
+#gen_prompt("img/test2.jpg")    
 #gen_prompt("img/test3.jpg")
 #gen_prompt("img/test4.png")
 #gen_prompt("img/test5.png")
@@ -126,4 +126,4 @@ def gen_prompt(inputImg):
 #gen_prompt("img/test13.jpg")
 
 #4-8 are PNGS!!!!! 
-#print(gen_prompt("img/test7.png"))
+print(gen_prompt("img/test7.png"))
