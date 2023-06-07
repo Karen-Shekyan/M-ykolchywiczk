@@ -7,29 +7,36 @@
 
 <body>
 <h2>Message</h2>
-<div id="message">
-    Empty
+<div id="username" hidden>
+{{username}}
 </div>
+<div id="roomnumber" hidden>
+{{roomnumber}}
+</div>
+
+Loading...
+
 <br>
-<form>
-    Message: 
-    <input tpye="text" name="toSend">
-    <br>
-    <input type="button" value="send" onClick="sendMessage(this.form)">
-</form>
-</body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
 <script type="text/javascript" charset="utf-8">
     var socket = io();
-    var user = document.forms['user'];
-    var room = "";
-    socket.on('info', function(data){
-        room = data;
-    });
+    var uName = document.getElementById("username").innerHTML;
+    var rCode = document.getElementById("roomnumber").innerHTML;
 
-    function sendMessage(fromform){
-        socket.emit('sending', [user, room, fromform.toSend.value])
-    }
+    socket.emit("userInfo", uName, rCode);
+    socket.on("approvedUser", (appUName, appRCode) => {
+	console.log(appUName)
+	console.log(appRCode)
+        uName = appUName;
+        rCode = appRCode;
+        console.log(uName)
+        console.log(rCode)
+        document.getElementById("username").innerHTML = appUName;
+        document.getElementById("roomnumber").innerHTML = appRCode;
+    });
 </script>
+
+</body>
+
 </html>

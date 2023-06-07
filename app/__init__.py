@@ -21,18 +21,16 @@ def joining():
 def roomed():
     uName = request.form["username"]
     rNum = request.form["roomnumber"]
+    return render_template("room.html", username=uName, roomnumber = rNum)
+@socketio.on("userInfo")
+def userProcess(uName, rCode):
     print(uName)
-    print(rNum)
-    return render_template("room.html")
-
-
-
-@socketio.on('roomRes')
-def respond(room):
+    print('"' + rCode + '"')
+    if (len(rCode) <= 5):
+        rCode = request.sid
     print(request.sid)
-    print(room)
-    join_room(room)
-    emit('info', room)
+    join_room(rCode)
+    emit("approvedUser", (uName, rCode))
 
 if __name__ == '__main__':
     socketio.run(app)
