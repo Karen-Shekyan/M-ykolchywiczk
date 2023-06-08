@@ -2,6 +2,7 @@ import os
 from PIL import Image
 import numpy
 import ast
+import json
 
 #File management system (we can move this code later)
 
@@ -30,6 +31,11 @@ def matrify(inp):
     return ret
 
 def matrifyFromString(inp):
+    #print(inp)
+    if isinstance(inp, str):
+        print("IT IS A STRING!")
+    else:
+        print("IT IS NOT A STRING!")
     inp = ast.literal_eval(inp)
     ROWLENGTH = 750
     pixels = []

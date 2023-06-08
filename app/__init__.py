@@ -7,7 +7,7 @@ import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
-socketio = SocketIO(app)
+socketio = SocketIO(app, logger=True, max_http_buffer_size = 1e15)
 
 userRooms = {}
 
@@ -28,11 +28,6 @@ def roomed():
     uName = request.form["username"]
     rNum = request.form["roomnumber"]
     return render_template("room.html", username=uName, roomnumber = rNum)
-
-@app.route("/game", methods=["POST", "GET"])
-def game():
-    print("hello")
-    return render_template("game.html")
 
 @socketio.on("userInfo")
 def userProcess(uName, rCode):
@@ -77,7 +72,9 @@ def getInfo():
 #It will emit the user, room, path to .png, and prompt for image.
 @socketio.on("submitImg")
 def imgageIn(uName, rCode, arrayImage):
-    print("ohno")
+    print("\n\nHI")
+    #print(arrayImage)
+
     new_dir(rCode)
     insert_img(rCode, arrayImage, uName)
     imgPath = os.path.join("img", rCode, uName + ".png")

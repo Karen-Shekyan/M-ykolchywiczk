@@ -64,3 +64,12 @@ karenS -- 2023-06-06 3:00 PM
 --------------------------------------------------------------
   - Fixed bugs in game.html
   - Prepared canvas drawing to be socketed to Python
+==============================================================
+
+brianW -- 2023-06-08 5:40PM
+---------------------------------------------------------------
+  - https://stackoverflow.com/questions/53399948/flask-socketio-send-images
+  - I swear to god
+  - this took me so fucking long
+  - you can now get an image from the canvas example page into the file system
+  - i have not figured out the user and room code assignments stuff yet
