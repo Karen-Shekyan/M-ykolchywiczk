@@ -3,6 +3,7 @@ from flask_socketio import SocketIO, send, emit, join_room, leave_room
 from images import *
 from api import *
 import os
+#from gevent.pywsgi import WSGIServer
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
@@ -26,6 +27,11 @@ def roomed():
     rNum = request.form["roomnumber"]
     return render_template("room.html", username=uName, roomnumber = rNum)
 
+@app.route("/game", methods=["POST", "GET"])
+def game():
+    print("hello")
+    return render_template("game.html")
+
 @socketio.on("userInfo")
 def userProcess(uName, rCode):
     print(uName)
@@ -34,7 +40,18 @@ def userProcess(uName, rCode):
         rCode = request.sid
     print(request.sid)
     join_room(rCode)
+
+    #Saving rcode and uname to cookies 
+    session['username'] = uName 
+    session["room"] = rCode
+
     emit("approvedUser", (uName, rCode))
+
+@socketio.on("getUser")
+def getInfo(): 
+    uName = session["username"]
+    rCode = session["room"]
+    emit("givenInfo", (uName, rCode))
 
 #Socket method that plays when an image is submitted
 #It will take the user, room, and raw image format. 
@@ -45,16 +62,21 @@ def userProcess(uName, rCode):
 #It will emit the user, room, path to .png, and prompt for image. 
 @socketio.on("submitImg")
 def imgageIn(uName, rCode, arrayImage):
-    print("oh no")
+    print("ohno")
     new_dir(rCode)
     insert_img(rCode, arrayImage, uName)
     imgPath = os.path.join("img", rCode, uName + ".png")
-    prompt = gen_prompt(imgPath)
-    emit("sendImage", (uName, rCode, imgPath, prompt))
+    #prompt = gen_prompt(imgPath)
+    #emit("sendImage", (uName, rCode, imgPath, prompt))
+    emit("sendImage", (uName, rCode, imgPath))
+
 
 @app.route("/end", methods=["POST", "GET"])
 def end():
     return render_template("end.html")
 
 if __name__ == '__main__':
-    socketio.run(app)
+    socketio.run(app, debug=True)
+    #http_server = WSGIServer(('', 5000), app)
+    #http_server.serve_forever()
+    #socketio.WSGIApp(socketio)

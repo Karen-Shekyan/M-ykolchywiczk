@@ -162,7 +162,18 @@ document.getElementById("done").addEventListener("click", submit);
 
 function submit() {
   const myImageData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
-  
+  var socket = io();
+
+        // socket.emit("getUser");
+        // socket.on("givenInfo", (UName, RCode) => {
+        //     uName = appUName;
+        //     rCode = appRCode;
+        // });
+
+      socket.emit("submitting", "tester", "test", myImageData);
+      socket.on("sendImage", (UName, rCode, path) => {
+
+      })
 }
 
 // ONE DIMENSIONAL LIST THAT IS width * height * 4 long
