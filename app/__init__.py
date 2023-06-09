@@ -35,15 +35,17 @@ def userProcess(uName, rCode):
     print('"' + rCode + '"')
     if (len(rCode) <= 5):
         rCode = request.sid
-    print(rCode)
+    print(request.sid)
     join_room(rCode)
 
     players = userRooms.get(rCode)
-    print(players)
     if (players == None):
         userRooms.update({rCode:[uName]})
     else:
-        userRooms[rCode].append(uName)
+        if (uName in userRooms[rCode]):
+            emit("redirect", {"url": "join"})
+        else:
+            userRooms[rCode].append(uName)
 
     print(userRooms)
 
