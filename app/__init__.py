@@ -63,6 +63,10 @@ def start(rCode):
 def game():
     return render_template("game.html")
 
+@app.route("/game_timer", methods=["POST", "GET"])
+def game_timer():
+    return render_template("game_timer.html")
+
 @socketio.on("getUser")
 def getInfo(): 
     uName = session["username"]
