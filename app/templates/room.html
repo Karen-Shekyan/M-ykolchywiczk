@@ -10,43 +10,51 @@
 </head>
 
 <body>
-  <h2>Message</h2>
-  <div id="username">
-    {{username}}
-  </div>
-  <div id="roomnumber">
-    {{roomnumber}}
-  </div>
-
-  <div id="rooms">
-    {{rooms}}
-  </div>
+  <h2>Waiting Room</h2>
+  Room Code: 
+  <div id="roomnumber">{{roomnumber}}</div>
+  <div id="username" hidden>{{username}}</div>
+  Wait List:
+  <div id="rooms">{{rooms}}</div>
 
   <br>
 
-  <button type="button" class="btn btn-success" id="start"> Start! </button>
+  <div id="StartButton"><button type="button" class="btn btn-success" id="start"> Start! </button></div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
   <script type="text/javascript" charset="utf-8">
       var socket = io();
       var uName = document.getElementById("username").innerHTML;
       var rCode = document.getElementById("roomnumber").innerHTML;
+      var waitList = document.getElementById("rooms").innerHTML;
 
       socket.emit("userInfo", uName, rCode);
-      socket.on("approvedUser", (appUName, appRCode, userRooms) => {
+      socket.on("approvedUser", (appUName, appRCode)=> {
           uName = appUName;
           rCode = appRCode;
-          rooms = userRooms
+          // waitList = userRooms
           document.getElementById("username").innerHTML = appUName;
           document.getElementById("roomnumber").innerHTML = appRCode;
-          document.getElementById("rooms").innerHTML = rooms;
+          // document.getElementById("rooms").innerHTML = userRooms;
       });
 
-      document.getElementById("start").addEventListener("click", start);
-      function start(rCode) {
-        rCode = document.getElementById("roomnumber").innerHTML;
-        socket.emit("startGame", rCode);
-      }
+      socket.on("listy", (userRooms) => {
+	waitList = userRooms
+	document.getElementById("rooms").innerHTML = userRooms;
+      });
+
+      console.log(document.getElementById("username").innerHTML)
+      console.log(document.getElementById("rooms").innerHTML.split(",")[0])
+
+
+
+            document.getElementById("start").addEventListener("click", start);
+            function start(rCode) {
+		if (document.getElementById("username").innerHTML === document.getElementById("rooms").innerHTML.split(",")[0]){
+              		rCode = document.getElementById("roomnumber").innerHTML;
+              		socket.emit("startGame", rCode);
+		}
+            }
 
       socket.on("redirect", function (data) {
           window.location = data.url;
