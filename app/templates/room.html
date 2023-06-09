@@ -13,7 +13,8 @@
   <h2>Waiting Room</h2>
   Room Code: 
   <div id="roomnumber">{{roomnumber}}</div>
-  <div id="username" hidden>{{username}}</div>
+  Player:
+  <div id="username">{{username}}</div>
   Wait List:
   <div id="rooms">{{rooms}}</div>
 
@@ -59,6 +60,7 @@
       socket.on("redirect", function (data) {
           window.location = data.url;
       });
+
   </script>
 
 </body>

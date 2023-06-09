@@ -39,11 +39,11 @@ def userProcess(uName, rCode):
     join_room(rCode)
 
     players = userRooms.get(rCode)
+    print(players)
     if (players == None):
         userRooms.update({rCode:[uName]})
     else:
-        players += [uName]
-        userRooms.update({rCode:[players]})
+        userRooms[rCode].append(uName)
 
     print(userRooms)
 
@@ -87,6 +87,17 @@ def imgageIn(uName, rCode, arrayImage):
 @app.route("/end", methods=["POST", "GET"])
 def end():
     return render_template("end.html")
+
+@socketio.on("leaving")
+def gone(uName, rCode, waitList):
+    print(uName)
+    print(rCode)
+    print(waitList)
+
+@socketio.on("disconnect")
+def dead():
+    print(request.sid)
+    print(userRooms)
 
 if __name__ == '__main__':
     socketio.run(app)
