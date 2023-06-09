@@ -10,6 +10,7 @@ app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app, logger=True, max_http_buffer_size = 1e9)
 
 userRooms = {}
+justUsers = {}
 
 @app.route("/")
 def landing():
@@ -41,13 +42,18 @@ def userProcess(uName, rCode):
     players = userRooms.get(rCode)
     if (players == None):
         userRooms.update({rCode:[uName]})
+        justUsers[request.sid] = uName
     else:
-        players += [uName]
-        userRooms.update({rCode:[players]})
+        if (uName in userRooms[rCode]):
+            emit("redirect", {"url": "join"})
+        else:
+            userRooms[rCode].append(uName)
+            justUsers[request.sid] = uName
 
     print(userRooms)
 
-    emit("approvedUser", (uName, rCode, userRooms[rCode]), to = rCode)
+    emit("approvedUser", (uName, rCode))
+    emit("listy", userRooms[rCode], to = rCode)
 
 @socketio.on("startGame")
 def start(rCode):
@@ -56,6 +62,10 @@ def start(rCode):
 @app.route("/game", methods=["POST", "GET"])
 def game():
     return render_template("game.html")
+
+@app.route("/game_timer", methods=["POST", "GET"])
+def game_timer():
+    return render_template("game_timer.html")
 
 @socketio.on("getUser")
 def getInfo(): 
@@ -95,5 +105,23 @@ def imgageIn(uName, rCode, arrayImage):
 def end():
     return render_template("end.html")
 
+@socketio.on("leaving")
+def gone(uName, rCode, waitList):
+    print(uName)
+    print(rCode)
+    print(waitList)
+
+@socketio.on("disconnect")
+def dead():
+    print(request.sid)
+    print(userRooms)
+    person = justUsers[request.sid]
+    print(person)
+    for room in userRooms:
+        if (person in userRooms[room]):
+            leave_room(room)
+            userRooms[room].remove(person)
+            emit("listy", userRooms[room], to = room)
+
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    socketio.run(app)

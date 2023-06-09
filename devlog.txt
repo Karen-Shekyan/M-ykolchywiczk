@@ -66,10 +66,19 @@ karenS -- 2023-06-06 3:00 PM
   - Prepared canvas drawing to be socketed to Python
 ==============================================================
 
+karenS -- 2023-06-07 5:00 PM
+--------------------------------------------------------------
+  - Figured out websockets and the wating room
+  - Users can start the game from the waiting room, which
+    effects all players in the room
+  - Player list is visible!
+  - Kinda buggy when users join/reload the page
+==============================================================
+
 brianW -- 2023-06-08 5:40PM
 ---------------------------------------------------------------
   - https://stackoverflow.com/questions/53399948/flask-socketio-send-images
   - I swear to god
-  - this took me so fucking long
+  - this took me so f*cking long
   - you can now get an image from the canvas example page into the file system
-  - i have not figured out the user and room code assignments stuff yet
+  - I have not figured out the user and room code assignments stuff yet
