@@ -11,7 +11,7 @@
 
 <body>
   <h2>Waiting Room</h2>
-  Room Code: 
+  Room Code:
   <div id="roomnumber">{{roomnumber}}</div>
   Player:
   <div id="username">{{username}}</div>
@@ -51,10 +51,10 @@
 
             document.getElementById("start").addEventListener("click", start);
             function start(rCode) {
-		if (document.getElementById("username").innerHTML === document.getElementById("rooms").innerHTML.split(",")[0]){
-              		rCode = document.getElementById("roomnumber").innerHTML;
-              		socket.emit("startGame", rCode);
-		}
+          		if (document.getElementById("username").innerHTML === document.getElementById("rooms").innerHTML.split(",")[0]){
+                        		rCode = document.getElementById("roomnumber").innerHTML;
+                        		socket.emit("startGame", rCode);
+          		}
             }
 
       socket.on("redirect", function (data) {
