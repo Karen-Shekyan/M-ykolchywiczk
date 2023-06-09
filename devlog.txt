@@ -64,3 +64,11 @@ karenS -- 2023-06-06 3:00 PM
 --------------------------------------------------------------
   - Fixed bugs in game.html
   - Prepared canvas drawing to be socketed to Python
+
+karenS -- 2023-06-07 5:00 PM
+--------------------------------------------------------------
+  - Figured out websockets and the wating room
+  - Users can start the game from the waiting room, which
+    effects all players in the room
+  - Player list is visible!
+  - Kinda buggy when users join/reload the page
