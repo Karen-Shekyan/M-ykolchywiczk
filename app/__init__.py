@@ -35,7 +35,7 @@ def userProcess(uName, rCode):
     print('"' + rCode + '"')
     if (len(rCode) <= 5):
         rCode = request.sid
-    print(request.sid)
+    print(rCode)
     join_room(rCode)
 
     players = userRooms.get(rCode)
@@ -47,7 +47,8 @@ def userProcess(uName, rCode):
 
     print(userRooms)
 
-    emit("approvedUser", (uName, rCode, userRooms[rCode]), to = rCode)
+    emit("approvedUser", (uName, rCode))
+    emit("listy", userRooms[rCode], to = rCode)
 
 @socketio.on("startGame")
 def start(rCode):
@@ -88,4 +89,4 @@ def end():
     return render_template("end.html")
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    socketio.run(app)
