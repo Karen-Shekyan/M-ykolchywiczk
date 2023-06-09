@@ -1,3 +1,5 @@
+//import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
+
 // wait for the content of the window element to load, then performs the operations.
 window.addEventListener("load", ()=>{
 	resize(); // Resizes the canvas once the window loads
@@ -162,7 +164,20 @@ document.getElementById("done").addEventListener("click", submit);
 
 function submit() {
   const myImageData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
-  
+
+  var socket = io();
+
+  // socket.emit("getUser");
+  // socket.on("givenInfo", (UName, RCode) => {
+  //     uName = appUName;
+  //     rCode = appRCode;
+  // });
+  console.log(myImageData.data.toString())  
+  //socket.emit("submitImg", "tester", "test", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].toString());
+  socket.emit("submitImg", "tester", "test", myImageData.data.toString());
+  socket.on("sendImage", (UName, rCode, path) => {
+
+  })
 }
 
 // ONE DIMENSIONAL LIST THAT IS width * height * 4 long
