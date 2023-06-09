@@ -10,6 +10,7 @@ app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app, logger=True, max_http_buffer_size = 1e15)
 
 userRooms = {}
+justUsers = {}
 
 @app.route("/")
 def landing():
@@ -41,11 +42,13 @@ def userProcess(uName, rCode):
     players = userRooms.get(rCode)
     if (players == None):
         userRooms.update({rCode:[uName]})
+        justUsers[request.sid] = uName
     else:
         if (uName in userRooms[rCode]):
             emit("redirect", {"url": "join"})
         else:
             userRooms[rCode].append(uName)
+            justUsers[request.sid] = uName
 
     print(userRooms)
 
@@ -100,6 +103,13 @@ def gone(uName, rCode, waitList):
 def dead():
     print(request.sid)
     print(userRooms)
+    person = justUsers[request.sid]
+    print(person)
+    for room in userRooms:
+        if (person in userRooms[room]):
+            leave_room(room)
+            userRooms[room].remove(person)
+            emit("listy", userRooms[room], to = room)
 
 if __name__ == '__main__':
     socketio.run(app)
