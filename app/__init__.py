@@ -1,13 +1,13 @@
 from flask import Flask, render_template, redirect, request, session, url_for
 from flask_socketio import SocketIO, send, emit, join_room, leave_room, rooms
 from images import *
-# from api import * THIS LINE CAUSED AN ERROR. NOT FIXIING IT --Karen
+from api import *
 import os
 #from gevent.pywsgi import WSGIServer
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
-socketio = SocketIO(app, logger=True, max_http_buffer_size = 1e15)
+socketio = SocketIO(app, logger=True, max_http_buffer_size = 1e9)
 
 userRooms = {}
 
@@ -63,6 +63,11 @@ def getInfo():
     rCode = session["room"]
     emit("givenInfo", (uName, rCode))
 
+@socketio.on("endGame")
+def end(rCode):
+    for img in os.walk(os.join("img", rCode)):
+        print("hey")
+        
 #Socket method that plays when an image is submitted
 #It will take the user, room, and raw image format.
 #It will create a directory for the room if no directory exists
@@ -79,8 +84,11 @@ def imgageIn(uName, rCode, arrayImage):
     insert_img(rCode, arrayImage, uName)
     imgPath = os.path.join("img", rCode, uName + ".png")
     #prompt = gen_prompt(imgPath)
-    #emit("sendImage", (uName, rCode, imgPath, prompt))
-    emit("sendImage", (uName, rCode, imgPath))
+    prompt = "hi"
+    with open(os.path.join("img", rCode, uName + ".txt"), 'w') as p:
+        p.write(prompt)
+    emit("sendImage", (uName, rCode, imgPath, prompt))
+    #emit("sendImage", (uName, rCode, imgPath))
 
 
 @app.route("/end", methods=["POST", "GET"])
