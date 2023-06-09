@@ -10,17 +10,51 @@
 </head>
 
 <body>
-  <h2>Waiting Room</h2>
-  Room Code:
-  <div id="roomnumber">{{roomnumber}}</div>
-  Player:
-  <div id="username">{{username}}</div>
-  Wait List:
-  <div id="rooms">{{rooms}}</div>
+  <div class="gtco-testimonials">
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div class="col-md-2 bg-secondary text-white" style="height: 90vh;">
+          AD SPACE
+        </div>
+        <div class="col-md-8" style="height: 90vh;">
+          <h2>Waiting Room</h2>
+          <p>Room Code:</p>
+          <div id="roomnumber"><h1><pre>{{roomnumber}}</pre></h1></div>
+          <br>
+          <p>Waiting List:</p>
+          <center>
+            <table class="table table-striped" style="width: 50%">
+              <tr>
+                <th>
+                  Rank
+                </th>
+                <th>
+                  Player
+                </th>
+              </tr>
+              {% for name in username %}
+              <tr>
+                <td>
+                  yeet
+                </td>
+                <td>
+                  {{ name }}
+                </td>
+              </tr>
+              {% endfor %}
+            </table>
+          </center>
+          <br>
+          <div id="StartButton"><button type="button" class="btn btn-success" id="start"> Start! </button></div>
+        </div>
+        <div class="col-md-2 bg-secondary text-white" style="height: 90vh;">
+          AD SPACE
+        </div>
+      </div>
+    </div>
+  </div>
 
   <br>
-
-  <div id="StartButton"><button type="button" class="btn btn-success" id="start"> Start! </button></div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
   <script type="text/javascript" charset="utf-8">
