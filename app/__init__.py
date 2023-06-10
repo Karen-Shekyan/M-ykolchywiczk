@@ -104,10 +104,13 @@ def imgageIn(uName, rCode, arrayImage):
         if (userRooms[rCode][i] == uName):
             index = i + 1
 
-    prompt = "hi"
-    with open(os.path.join("img", rCode, "prompt", uName + ".txt"), 'w') as p:
-        p.write(prompt)
-    emit("sendImage", (userRooms[rCode][index], rCode, imgPath, prompt))
+    if (index == len(userRooms[rCode]):
+        print ("Trigger End Room")
+    else:
+        prompt = "hi"
+        with open(os.path.join("img", rCode, "prompt", uName + ".txt"), 'w') as p:
+            p.write(prompt)
+        emit("sendImage", (userRooms[rCode][index], rCode, imgPath, prompt))
 
 
 @app.route("/end", methods=["POST", "GET"])
