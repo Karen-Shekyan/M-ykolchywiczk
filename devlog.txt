@@ -82,3 +82,8 @@ brianW -- 2023-06-08 5:40PM
   - this took me so f*cking long
   - you can now get an image from the canvas example page into the file system
   - I have not figured out the user and room code assignments stuff yet
+==============================================================
+
+brianW -- 2023-06-10 3:40PM
+---------------------------------------------------------------
+  - handled packaging and sending of the entire room's game results

@@ -3,6 +3,7 @@ from flask_socketio import SocketIO, send, emit, join_room, leave_room, rooms
 from images import *
 from api import *
 import os
+import numpy
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
@@ -72,14 +73,19 @@ def getInfo():
     rCode = session["room"]
     emit("givenInfo", (uName, rCode))
 
-@socketio.on("endGame")
-def end(rCode):
+@socketio.on("endResults")
+def endRes(rCode):
     retPics = []
     retPrompts = []
-    for img in os.walk(os.join("img", rCode, "pic")):
-        retPics.append(img)
-    for img in os.walk(os.join("img", rCode, "pic")):
-        retPics.append(img)
+    for path in os.listdir(os.path.join("img", rCode, "pic")):
+        with Image.open(os.path.join("img", rCode, "pic", path)) as img:
+            retPics.append(numpy.array(img).ravel().tolist())
+            #img.close()
+    for path in os.listdir(os.path.join("img", rCode, "prompt")):
+        with open(os.path.join("img", rCode, "prompt", path)) as prompt:
+            retPrompts.append(prompt.read())
+            prompt.close()
+    emit("results", (retPics, retPrompts))
         
 #Socket method that plays when an image is submitted
 #It will take the user, room, and raw image format.
@@ -90,27 +96,25 @@ def end(rCode):
 #It will emit the user, room, path to .png, and prompt for image.
 @socketio.on("submitImg")
 def imgageIn(uName, rCode, arrayImage):
-    print("\n\nHI")
-    #print(arrayImage)
+    #print("\n\nHI")
 
     new_dir(rCode)
     insert_img(rCode, arrayImage, uName)
     imgPath = os.path.join("img", rCode, "img", uName + ".png")
-    #prompt = gen_prompt(imgPath)
-    #emit("sendImage", (uName, rCode, imgPath, prompt))
 
     index = 0
     for i in range(len(userRooms[rCode])):
         if (userRooms[rCode][i] == uName):
             index = i + 1
 
-    if (index == len(userRooms[rCode]):
+    if (index == len(userRooms[rCode])):
         print ("Trigger End Room")
     else:
-        prompt = "hi"
+        prompt = "PLACEHOLDER"
+        #prompt = gen_prompt(imgPath)
         with open(os.path.join("img", rCode, "prompt", uName + ".txt"), 'w') as p:
             p.write(prompt)
-        emit("sendImage", (userRooms[rCode][index], rCode, imgPath, prompt), to = rCode)
+        emit("sendImage", (userRooms[rCode][index], rCode, prompt), to = rCode)
 
 
 @app.route("/end", methods=["POST", "GET"])
@@ -122,7 +126,7 @@ def dead():
     print(request.sid)
     print(userRooms)
     person = justUsers[request.sid]
-    print(person)
+    print(person)   
     for room in userRooms:
         if (person in userRooms[room]):
             leave_room(room)

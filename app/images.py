@@ -42,7 +42,6 @@ def matrify(inp):
     return ret
 
 def matrifyFromString(inp):
-    #print(inp)
     if isinstance(inp, str):
         print("IT IS A STRING!")
     else:
@@ -68,6 +67,9 @@ def insert_img(rc, img, tc):
     #Change matrifyFromSTring to matrifiy if not deailng with strings
     Image.fromarray(numpy.array(matrifyFromString(img)).astype(numpy.uint8), mode="RGBA").save(os.path.join("img", rc, "pic", tc + ".png"))
 
+def insert_img_nostr(rc, img, tc):
+    #Change matrifyFromSTring to matrifiy if not deailng with strings
+    Image.fromarray(numpy.array(matrify(img)).astype(numpy.uint8), mode="RGBA").save(os.path.join("img", rc, "pic", tc + ".png"))
 
 #new_dir("boo")
 '''
@@ -124,14 +126,15 @@ insert_img("boo", test4, "4")
 #insert_img("boo", test6, "6")
 
 if __name__ == '__main__':
-    new_dir("boo")
+    new_dir("test_room")
     with open("img/test.txt", "r") as file:
         ex = file.read().strip()
         #raw = matrifyFromString(ex)
         #print(raw)
         #test7 = numpy.asarray([raw])
-        insert_img("boo", ex, "7")
+        insert_img("test_room", ex, "test_img")
     
         file.close()
     
-    rm_dir("boo")
+    #rm_dir("boo")
+
