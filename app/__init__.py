@@ -90,18 +90,17 @@ def imgageIn(uName, rCode, arrayImage):
     imgPath = os.path.join("img", rCode, uName + ".png")
     #prompt = gen_prompt(imgPath)
     #emit("sendImage", (uName, rCode, imgPath, prompt))
-    emit("sendImage", (uName, rCode, imgPath))
+
+    index = 0
+    for i in range(len(userRooms[rCode])):
+        if (userRooms[rCode][i] == uName):
+            index = i + 1
+    emit("sendImage", (userRooms[rCode][index], rCode, imgPath))
 
 
 @app.route("/end", methods=["POST", "GET"])
 def end():
     return render_template("end.html")
-
-@socketio.on("leaving")
-def gone(uName, rCode, waitList):
-    print(uName)
-    print(rCode)
-    print(waitList)
 
 @socketio.on("disconnect")
 def dead():
