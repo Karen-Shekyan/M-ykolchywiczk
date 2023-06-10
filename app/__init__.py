@@ -3,7 +3,6 @@ from flask_socketio import SocketIO, send, emit, join_room, leave_room, rooms
 from images import *
 from api import *
 import os
-#from gevent.pywsgi import WSGIServer
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
@@ -75,8 +74,12 @@ def getInfo():
 
 @socketio.on("endGame")
 def end(rCode):
-    for img in os.walk(os.join("img", rCode)):
-        print("hey")
+    retPics = []
+    retPrompts = []
+    for img in os.walk(os.join("img", rCode, "pic")):
+        retPics.append(img)
+    for img in os.walk(os.join("img", rCode, "pic")):
+        retPics.append(img)
         
 #Socket method that plays when an image is submitted
 #It will take the user, room, and raw image format.
@@ -92,10 +95,10 @@ def imgageIn(uName, rCode, arrayImage):
 
     new_dir(rCode)
     insert_img(rCode, arrayImage, uName)
-    imgPath = os.path.join("img", rCode, uName + ".png")
+    imgPath = os.path.join("img", rCode, "img", uName + ".png")
     #prompt = gen_prompt(imgPath)
     prompt = "hi"
-    with open(os.path.join("img", rCode, uName + ".txt"), 'w') as p:
+    with open(os.path.join("img", rCode, "prompt", uName + ".txt"), 'w') as p:
         p.write(prompt)
     emit("sendImage", (uName, rCode, imgPath, prompt))
     #emit("sendImage", (uName, rCode, imgPath))

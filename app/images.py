@@ -12,6 +12,8 @@ import shutil
 def new_dir(rc):
     try:
         os.mkdir(os.path.join("img", rc))
+        os.mkdir(os.path.join("img", rc, "pic"))
+        os.mkdir(os.path.join("img", rc, "prompt"))
     except:
         print("already exists")
 
@@ -64,7 +66,7 @@ def matrifyFromString(inp):
 #Creates a standard version of array-ified image and inserts it into the corresponding folder for the specified room code
 def insert_img(rc, img, tc):
     #Change matrifyFromSTring to matrifiy if not deailng with strings
-    Image.fromarray(numpy.array(matrifyFromString(img)).astype(numpy.uint8), mode="RGBA").save(os.path.join("img", rc, tc + ".png"))
+    Image.fromarray(numpy.array(matrifyFromString(img)).astype(numpy.uint8), mode="RGBA").save(os.path.join("img", rc, "pic", tc + ".png"))
 
 
 #new_dir("boo")
