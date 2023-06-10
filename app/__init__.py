@@ -110,7 +110,7 @@ def imgageIn(uName, rCode, arrayImage):
         prompt = "hi"
         with open(os.path.join("img", rCode, "prompt", uName + ".txt"), 'w') as p:
             p.write(prompt)
-        emit("sendImage", (userRooms[rCode][index], rCode, imgPath, prompt))
+        emit("sendImage", (userRooms[rCode][index], rCode, imgPath, prompt), to = rCode)
 
 
 @app.route("/end", methods=["POST", "GET"])
