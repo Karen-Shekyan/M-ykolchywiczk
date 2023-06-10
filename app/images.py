@@ -3,6 +3,7 @@ from PIL import Image
 import numpy
 import ast
 import json
+import shutil
 
 #File management system (we can move this code later)
 
@@ -11,8 +12,18 @@ import json
 def new_dir(rc):
     try:
         os.mkdir(os.path.join("img", rc))
+        os.mkdir(os.path.join("img", rc, "pic"))
+        os.mkdir(os.path.join("img", rc, "prompt"))
     except:
         print("already exists")
+
+#Takes a room code
+#Removes the corresponding folder along with all of its contents 
+def rm_dir(rc):
+    try: 
+        shutil.rmtree(os.path.join("img", rc))
+    except: 
+        print("directory does not exist!")
 
 #Takes a 1d array out of JS 
 #returns a 2d arrayified thingymabob off of that
@@ -55,7 +66,7 @@ def matrifyFromString(inp):
 #Creates a standard version of array-ified image and inserts it into the corresponding folder for the specified room code
 def insert_img(rc, img, tc):
     #Change matrifyFromSTring to matrifiy if not deailng with strings
-    Image.fromarray(numpy.array(matrifyFromString(img)).astype(numpy.uint8), mode="RGBA").save(os.path.join("img", rc, tc + ".png"))
+    Image.fromarray(numpy.array(matrifyFromString(img)).astype(numpy.uint8), mode="RGBA").save(os.path.join("img", rc, "pic", tc + ".png"))
 
 
 #new_dir("boo")
@@ -113,6 +124,7 @@ insert_img("boo", test4, "4")
 #insert_img("boo", test6, "6")
 
 if __name__ == '__main__':
+    new_dir("boo")
     with open("img/test.txt", "r") as file:
         ex = file.read().strip()
         #raw = matrifyFromString(ex)
@@ -121,3 +133,5 @@ if __name__ == '__main__':
         insert_img("boo", ex, "7")
     
         file.close()
+    
+    rm_dir("boo")
