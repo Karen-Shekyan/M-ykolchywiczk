@@ -18,11 +18,12 @@
         </div>
         <div class="col-md-8" style="height: 90vh;">
           <h2>Waiting Room</h2>
-          <div id="username"><h1><pre>{{username}}</pre><h1></div>
+          <h1><pre><div id="username">{{username}}</div></pre><h1>
           <br>
           <p>Room Code:</p>
-          <div id="roomnumber"><h1><pre>{{roomnumber}}</pre></h1></div>
+          <h2><pre><div id="roomnumber">{{roomnumber}}</div></pre></h2>
           <br>
+          <div id="rooms"></div>
           <p>Waiting List:</p>
           <center>
             <table class="table table-striped" style="width: 50%">
@@ -60,7 +61,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
   <script type="text/javascript" charset="utf-8">
-      console.log("HI")
+      // console.log("HI")
       var socket = io();
       var uName = document.getElementById("username").innerHTML;
       var rCode = document.getElementById("roomnumber").innerHTML;
