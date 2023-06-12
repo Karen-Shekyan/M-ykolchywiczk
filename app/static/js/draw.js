@@ -172,11 +172,11 @@ function submit() {
 
   var socket = io();
 
-  //console.log(myImageData.data.toString())  
+  //console.log(myImageData.data.toString())
   //socket.emit("submitImg", "tester", "test", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].toString());
   socket.emit("submitImg", uName, rCode, myImageData.data.toString());
-  socket.on("sendImage", (UName, rCode, prompt) => { })
-  //does the prompt ever have to go through this? 
+  socket.on("sendImage", (nextUser, rCode, prompt) => { })
+  //does the prompt ever have to go through this?
 }
 
 // ONE DIMENSIONAL LIST THAT IS width * height * 4 long

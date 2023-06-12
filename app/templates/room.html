@@ -88,19 +88,23 @@
 
 
 
-            document.getElementById("start").addEventListener("click", start);
-            function start(rCode) {
-          		if (document.getElementById("username").innerHTML === document.getElementById("rooms").innerHTML.split(",")[0]){
-            		rCode = document.getElementById("roomnumber").innerHTML;
-      					sessionStorage.setItem("uName", uName);
-      					sessionStorage.setItem("rCode", rCode);
-      					sessionStorage.setItem("rooms", waitList);
-            		socket.emit("startGame", rCode);
-          		}
-            }
+      document.getElementById("start").addEventListener("click", start);
+      function start(rCode) {
+    		if (document.getElementById("username").innerHTML === document.getElementById("rooms").innerHTML.split(",")[0]){
+      		rCode = document.getElementById("roomnumber").innerHTML;
+					sessionStorage.setItem("uName", uName);
+					sessionStorage.setItem("rCode", rCode);
+					sessionStorage.setItem("rooms", waitList);
+      		socket.emit("startGame", rCode);
+    		}
+      }
 
       socket.on("redirect", function (data) {
-          window.location = data.url;
+          if (document.getElementById("username").innerHTML === document.getElementById("rooms").innerHTML.split(",")[0]) {
+            window.location = "game_timer";
+          } else {
+            window.location = data.url;
+          }
       });
 
   </script>

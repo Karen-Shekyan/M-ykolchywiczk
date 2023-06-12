@@ -106,6 +106,7 @@ def imgageIn(uName, rCode, arrayImage):
     for i in range(len(userRooms[rCode])):
         if (userRooms[rCode][i] == uName):
             index = i + 1
+            break
 
     if (index == len(userRooms[rCode])):
         print ("Trigger End Room")
