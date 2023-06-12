@@ -23,28 +23,18 @@
           <p>Room Code:</p>
           <h2><pre><div id="roomnumber">{{roomnumber}}</div></pre></h2>
           <br>
-          <div id="rooms"></div>
+          <div id="rooms" hidden></div>
           <p>Waiting List:</p>
           <center>
-            <table class="table table-striped" style="width: 50%">
+            <table class="table table-striped" style="width: 50%" id="players">
               <tr>
                 <th>
-                  Rank
+                  #
                 </th>
                 <th>
                   Player
                 </th>
               </tr>
-              {% for name in username %}
-              <tr>
-                <td>
-                  yeet
-                </td>
-                <td>
-                  {{ name }}
-                </td>
-              </tr>
-              {% endfor %}
             </table>
           </center>
           <br>
@@ -81,23 +71,28 @@
       socket.on("listy", (userRooms) => {
       	waitList = userRooms
       	document.getElementById("rooms").innerHTML = userRooms;
+
+        var playersHTML = "<tr><th>#</th><th>Player</th></tr>";
+        for (var i = 0; i < waitList.length; i++) {
+          playersHTML += "<tr> <td>" + (i + 1) + "</td><td>" + waitList[i] + "</td></tr>";
+        }
+        document.getElementById("players").innerHTML = playersHTML;
+        console.log(playersHTML);
       });
 
       console.log(document.getElementById("username").innerHTML)
       console.log(document.getElementById("rooms").innerHTML.split(",")[0])
 
-
-
-            document.getElementById("start").addEventListener("click", start);
-            function start(rCode) {
-          		if (document.getElementById("username").innerHTML === document.getElementById("rooms").innerHTML.split(",")[0]){
-            		rCode = document.getElementById("roomnumber").innerHTML;
-      					sessionStorage.setItem("uName", uName);
-      					sessionStorage.setItem("rCode", rCode);
-      					sessionStorage.setItem("rooms", waitList);
-            		socket.emit("startGame", rCode);
-          		}
-            }
+      document.getElementById("start").addEventListener("click", start);
+      function start(rCode) {
+    		if (document.getElementById("username").innerHTML === document.getElementById("rooms").innerHTML.split(",")[0]){
+      		rCode = document.getElementById("roomnumber").innerHTML;
+  				sessionStorage.setItem("uName", uName);
+  				sessionStorage.setItem("rCode", rCode);
+  				sessionStorage.setItem("rooms", waitList);
+      		socket.emit("startGame", rCode);
+    		}
+      }
 
       socket.on("redirect", function (data) {
           window.location = data.url;
