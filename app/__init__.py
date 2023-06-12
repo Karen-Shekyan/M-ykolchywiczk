@@ -11,6 +11,7 @@ socketio = SocketIO(app, logger=True, max_http_buffer_size = 1e9)
 
 userRooms = {}
 justUsers = {}
+allPrompts = {}
 
 @app.route("/")
 def landing():
@@ -108,31 +109,43 @@ def imgageIn(uName, rCode, arrayImage):
             index = i + 1
             break
 
+    print(rCode, userRooms[rCode])
     if (index == len(userRooms[rCode])):
         print ("Trigger End Room")
+        emit("endGame", rCode)                          ############# HERE #############
+        # emit("endGame", rCode, to = rCode) ### THIS DOESN'T WORK ###
     else:
         prompt = "PLACEHOLDER"
         #prompt = gen_prompt(imgPath)
+
+        # prevPrompts = allPrompts.get(rCode)
+        # if (prevPrompts == None):
+        #     allPrompts.update({rCode:[prompt]})
+        # else:
+        #     allPrompts[rCode].append(prompt)
+
         with open(os.path.join("img", rCode, "prompt", uName + ".txt"), 'w') as p:
             p.write(prompt)
         emit("sendImage", (userRooms[rCode][index], rCode, prompt), to = rCode)
+    print("??")
 
 
 @app.route("/end", methods=["POST", "GET"])
 def end():
+    print("HI")
     return render_template("end.html")
 
-@socketio.on("disconnect")
-def dead():
-    print(request.sid)
-    print(userRooms)
-    person = justUsers[request.sid]
-    print(person)
-    for room in userRooms:
-        if (person in userRooms[room]):
-            leave_room(room)
-            userRooms[room].remove(person)
-            emit("listy", userRooms[room], to = room)
+# @socketio.on("disconnect")
+# def dead():
+#     print(request.sid)
+#     print(userRooms)
+#     person = justUsers[request.sid]
+#     print(person)
+#     for room in userRooms:
+#         if (person in userRooms[room]):
+#             leave_room(room)
+#             userRooms[room].remove(person)
+#             emit("listy", userRooms[room], to = room)
 
 if __name__ == '__main__':
-    socketio.run(app)
+    socketio.run(app, debug=True)

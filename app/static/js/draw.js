@@ -163,21 +163,4 @@ function selectColor(event) {
     j++
   }
 }
-
-document.getElementById("done").addEventListener("click", submit);
-
-
-function submit() {
-  const myImageData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
-
-  var socket = io();
-
-  //console.log(myImageData.data.toString())
-  //socket.emit("submitImg", "tester", "test", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].toString());
-  socket.emit("submitImg", uName, rCode, myImageData.data.toString());
-  socket.on("sendImage", (nextUser, rCode, prompt) => { })
-  //does the prompt ever have to go through this?
-}
-
-// ONE DIMENSIONAL LIST THAT IS width * height * 4 long
-// redIndex, greenIndex, blueIndex, alphaIndex
+// REMOVED METHOD HERE
