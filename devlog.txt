@@ -16,7 +16,7 @@ Description:
  \:\ \ \ \\:\/___/\\:\ \\ \ \\:\ \    \:\ \ \ \\:\ /____/\
   \:\ \ \ \\::___\/_\:\_/.:\ \\:\ \____\:\ \ \ \\:\\_  _\/
    \:\/.:| |\:\____/\\ ..::/ / \:\/___/\\:\_\ \ \\:\_\ \ \
-    \____/_/ \_____\/ \___/_(   \_____\/ \_____\/ \_____\/
+    \____/_/ \_____\/ \___/_/   \_____\/ \_____\/ \_____\/
 ==============================================================
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
@@ -32,6 +32,12 @@ brianW -- 2023-06-03 8:10 PM
   - do i need to like credit the astica creator on the code he provided for asticavision use? No liscense information is provided
 ==============================================================
 
+sadiN -- 2023-06-05 2:00 AM
+--------------------------------------------------------------
+  - start of flask app
+  - started basic testing/usage of websockets
+  - Testing on mixing HTML forms and websocket signals
+==============================================================
 karenS -- 2023-06-05 8:50 AM
 --------------------------------------------------------------
   - Made draw.html
@@ -53,6 +59,10 @@ karenS -- 2023-06-05 9:00 PM
 --------------------------------------------------------------
   - Rename draw.html to game.html and made it more functional
   - Massively overengineered a COLOR PALETTE
+
+sadiN -- 2023-06-05 11:00 PM
+--------------------------------------------------------------
+  - Further work with forms and websockets. Route changes exceed js signal emission, so shenaniganery ensues.
 ==============================================================
 
 karenS -- 2023-06-06 10:10 AM
@@ -64,6 +74,10 @@ karenS -- 2023-06-06 3:00 PM
 --------------------------------------------------------------
   - Fixed bugs in game.html
   - Prepared canvas drawing to be socketed to Python
+
+sadiN -- 2023-06-06 10:00 PM
+--------------------------------------------------------------
+  - Finally have a way to reconcile forms and websockets using hidden tags in the HTML and getting that info into the js
 ==============================================================
 
 karenS -- 2023-06-07 5:00 PM
@@ -73,6 +87,10 @@ karenS -- 2023-06-07 5:00 PM
     effects all players in the room
   - Player list is visible!
   - Kinda buggy when users join/reload the page
+
+sadiN -- 2023-06-07 7:00 PM
+  - Final html page finally works
+  - Handling merge conflicts with other people's work
 ==============================================================
 
 brianW -- 2023-06-08 5:40PM
@@ -84,6 +102,13 @@ brianW -- 2023-06-08 5:40PM
   - I have not figured out the user and room code assignments stuff yet
 ==============================================================
 
+sadiN -- 2023-06-09 2:00 AM
+---------------------------------------------------------------
+  - Additional features in waiting room, like users leaving, list of people in rooms, and unable to share names in a room
+
 brianW -- 2023-06-10 3:40PM
 ---------------------------------------------------------------
   - handled packaging and sending of the entire room's game results
+sadiN -- 2023-06-10 11:00 PM
+---------------------------------------------------------------
+  - Passing info between pages through the js with sessions
