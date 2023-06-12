@@ -68,7 +68,7 @@ def game_timer():
     return render_template("game_timer.html")
 
 @socketio.on("getUser")
-def getInfo(): 
+def getInfo():
     uName = session["username"]
     rCode = session["room"]
     emit("givenInfo", (uName, rCode))
@@ -86,7 +86,7 @@ def endRes(rCode):
             retPrompts.append(prompt.read())
             prompt.close()
     emit("results", (retPics, retPrompts))
-        
+
 #Socket method that plays when an image is submitted
 #It will take the user, room, and raw image format.
 #It will create a directory for the room if no directory exists
@@ -126,7 +126,7 @@ def dead():
     print(request.sid)
     print(userRooms)
     person = justUsers[request.sid]
-    print(person)   
+    print(person)
     for room in userRooms:
         if (person in userRooms[room]):
             leave_room(room)
