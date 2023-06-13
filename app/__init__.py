@@ -3,7 +3,7 @@ from flask_socketio import SocketIO, send, emit, join_room, leave_room, rooms
 from images import *
 from api import *
 import os
-import numpy
+import numpy, random
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
@@ -30,6 +30,16 @@ def roomed():
     uName = request.form["username"]
     rNum = request.form["roomnumber"]
     return render_template("room.html", username=uName, roomnumber = rNum)
+
+@socketio.on("getPrompt")
+def givePrompt(rCode):
+    prevPrompts = allPrompts.get(rCode)
+    prompt = ""
+    if (prevPrompts == None):
+        prompt = open("prompts.txt", "r").read().split("\n")[random.randint(0,345)] #prompts has 345 lines
+    else:
+        prompt = prevPrompts[len(prevPrompts)-1]
+    emit("givenPrompt", prompt, to = rCode)
 
 @socketio.on("userInfo")
 def userProcess(uName, rCode):
@@ -126,11 +136,11 @@ def imgageIn(uName, rCode, arrayImage):
         prompt = "PLACEHOLDER"
         #prompt = gen_prompt(imgPath)
 
-        # prevPrompts = allPrompts.get(rCode)
-        # if (prevPrompts == None):
-        #     allPrompts.update({rCode:[prompt]})
-        # else:
-        #     allPrompts[rCode].append(prompt)
+        prevPrompts = allPrompts.get(rCode)
+        if (prevPrompts == None):
+            allPrompts.update({rCode:[prompt]})
+        else:
+            allPrompts[rCode].append(prompt)
 
         with open(os.path.join("img", rCode, "prompt", uName + ".txt"), 'w') as p:
             p.write(prompt)

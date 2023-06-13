@@ -51,21 +51,21 @@
 
 
     <script type="text/javascript" charset="utf-8">
-    var socket = io();
+      var socket = io();
 
-    socket.on("endGame", (rCode) => {
-        console.log("DONE"); // THIS NEVER PRINTS
-        window.location = "end";
-    });
+      socket.on("endGame", (rCode) => {
+          console.log("DONE"); // THIS NEVER PRINTS
+          window.location = "end";
+      });
 
-    socket.on("sendImage", (nextUser, rCode, prompt) => {
-      console.log(uName);
-      if(uName === nextUser){
-	window.location = "game_timer";
-      } else {
+      socket.on("sendImage", (nextUser, rCode, prompt) => {
+        console.log(uName);
+        if(uName === nextUser){
+        	window.location = "game_timer";
+        } else {
         	window.location = "game";
-	}
-    });
+      	}
+      });
 
     </script>
   </body>

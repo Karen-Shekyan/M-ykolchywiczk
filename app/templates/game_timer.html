@@ -13,7 +13,7 @@
   <body>
     <div id="page">
     <h1> Draw! </h1>
-    <h5> Prompt: ... </h5>
+    <h5> Prompt: <div id="prompt"></div> </h5>
     <br>
 
     <div class="container">
@@ -63,7 +63,14 @@
     <script type="text/javascript" src="../static/js/draw.js"></script>
 
     <script>
+    var socket = io();
+
     window.onload = function() {
+      socket.emit("getPrompt", rCode);
+      socket.on("givenPrompt", prompt => {
+        document.getElementById('prompt').innerHTML = prompt;
+      });
+
       var time = 60;
       var countdown;
 
@@ -92,7 +99,6 @@
 
 //===========================================================================================================
 
-    var socket = io();
 
     socket.on("endGame", (rCode) => {
         console.log("DONE"); // THIS NEVER PRINTS

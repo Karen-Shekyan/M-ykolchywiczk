@@ -12,6 +12,8 @@ window.addEventListener("load", ()=>{
 	resize(); // Resizes the canvas once the window loads
   resizeC();
   loadColors();
+
+	ctx.fillStyle = "white";
   ctx.rect(0, 0, 750, 480);
 
 	document.addEventListener("mousedown", startPainting);
