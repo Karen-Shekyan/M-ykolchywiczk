@@ -18,10 +18,17 @@
 
     <div class="container">
       <div class="row justify-content-md-center">
-        <div class="col-md-2 text-white" style="background-color: lightgrey; border: 1px solid black;">
+        <div class="col-md-2">
+        <div style="background-color: white; border: 1px solid black; height: 40vh;">
           <br>
           <h4 style="color: black;"> Player List </h4>
+          <hr>
+          <center>
+            <table class="table table-striped" style="width: 50%" id="players">
+            </table>
+          </center>
         </div>
+      </div>
         <div class="col-md-10">
           <div class="container">
             <div class="row justify-content-md-center">
@@ -61,7 +68,6 @@
       socket.on("sendImage", (nextUser, rCode, prompt) => {
         console.log(uName);
         if(uName === nextUser){
-		sessionStorage.setItem("yourPrompt", prompt);
         	window.location = "game_timer";
         } else {
         	window.location = "game";
