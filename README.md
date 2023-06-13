@@ -23,3 +23,6 @@ Copypasta [Astica API](https://github.com/stuy-softdev/notes-and-code/blob/main/
 Start the server:<br>
 `cd app/`<br>
 `python3 __init__.py`
+
+**Video Demo:**<br>
+[Link](https://www.youtube.com/watch?v=t5DKbQHjQEQ)
