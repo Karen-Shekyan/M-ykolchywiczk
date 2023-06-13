@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request, session, url_for
+from flask import Flask, render_template, redirect, request, session, url_for, send_from_directory
 from flask_socketio import SocketIO, send, emit, join_room, leave_room, rooms
 from images import *
 from api import *
@@ -90,9 +90,7 @@ def endRes(rCode):
     retPics = []
     retPrompts = []
     for path in os.listdir(os.path.join("img", rCode, "pic")):
-        with Image.open(os.path.join("img", rCode, "pic", path)) as img:
-            retPics.append(numpy.array(img).ravel().tolist())
-            #img.close()
+        retPics.append(os.path.join("img", rCode, "pic", path))
     for path in os.listdir(os.path.join("img", rCode, "prompt")):
         with open(os.path.join("img", rCode, "prompt", path)) as prompt:
             retPrompts.append(prompt.read())
@@ -104,6 +102,10 @@ def recon(rCode):
     print("RECONNECTING...")
     join_room(rCode)
     print(rooms())
+
+@app.route('/img/<path:path>')
+def serveImg(path):
+    return send_from_directory("img", path)
 
 #Socket method that plays when an image is submitted
 #It will take the user, room, and raw image format.
@@ -129,6 +131,10 @@ def imgageIn(uName, rCode, arrayImage):
     print(rCode, userRooms[rCode])
     if (index == len(userRooms[rCode])):
         print ("Trigger End Room")
+        #just debugging
+        prompt = "PLACEHOLDER"
+        with open(os.path.join("img", rCode, "prompt", uName + ".txt"), 'w') as p:
+            p.write(prompt)
         print(rooms())
         # emit("endGame", rCode, callback=print("GOT IT"))                     ############# HERE #############
         emit("endGame", rCode, to = rCode, callback=print("GOT IT")) ### THIS DOESN'T WORK ###
@@ -167,4 +173,4 @@ def end():
 #             emit("listy", userRooms[room], to = room)
 
 if __name__ == '__main__':
-    socketio.run(app)
+    socketio.run(app, allow_unsafe_werkzeug=True)
