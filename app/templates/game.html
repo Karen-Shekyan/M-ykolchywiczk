@@ -61,7 +61,7 @@
     socket.on("sendImage", (nextUser, rCode, prompt) => {
       let pageHTML = "";
       console.log(uName);
-      if (uName = nextUser) {
+      if (uName === nextUser) {
         pageHTML = `<h1> Draw! </h1>
                     <h5> Prompt: `+ prompt + `</h5>
                     <br>
