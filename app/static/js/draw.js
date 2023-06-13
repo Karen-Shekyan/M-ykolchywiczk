@@ -19,6 +19,14 @@ window.addEventListener("load", ()=>{
 	window.addEventListener("resize", resize);
   window.addEventListener("resize", resizeC);
   window.addEventListener("resize", loadColors);
+
+  var waitListSplit = waitList.split(',');
+
+  var playersHTML = "<tr><th>&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;</th><th>Player&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th></tr>";
+  for (var i = 0; i < waitListSplit.length; i++) {
+    playersHTML += "<tr> <td><center>" + (i + 1) + "</center></td><td>" + waitListSplit[i] + "</td></tr>";
+  }
+  document.getElementById("players").innerHTML = playersHTML;
 });
 
 const canvas = document.getElementById("draw");
