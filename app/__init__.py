@@ -140,8 +140,8 @@ def imgageIn(uName, rCode, arrayImage):
         # emit("endGame", rCode, callback=print("GOT IT"))                     ############# HERE #############
         emit("endGame", rCode, to = rCode, callback=print("GOT IT")) ### THIS DOESN'T WORK ###
     else:
-        prompt = "PLACEHOLDER"
-        #prompt = gen_prompt(imgPath)
+        # prompt = "PLACEHOLDER"
+        prompt = gen_prompt(imgPath)
 
         prevPrompts = allPrompts.get(rCode)
         if (prevPrompts == None):
