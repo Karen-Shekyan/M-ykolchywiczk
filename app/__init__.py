@@ -39,6 +39,7 @@ def givePrompt(rCode):
         prompt = open("prompts.txt", "r").read().split("\n")[random.randint(0,345)] #prompts has 345 lines
     else:
         prompt = prevPrompts[len(prevPrompts)-1]
+    print(prompt)
     emit("givenPrompt", prompt, to = rCode)
 
 @socketio.on("userInfo")

@@ -66,10 +66,16 @@
     var socket = io();
 
     window.onload = function() {
-      socket.emit("getPrompt", rCode);
-      socket.on("givenPrompt", prompt => {
-        document.getElementById('prompt').innerHTML = prompt;
-      });
+	if (sessionStorage.getItem("yourPrompt") == null){
+      		socket.emit("getPrompt", rCode);
+      		socket.on("givenPrompt", prompt => {
+			console.log(prompt);
+			sessionStorage.setItem("yourPrompt", prompt);
+        		document.getElementById('prompt').innerHTML = prompt;
+      		});
+	}
+
+	document.getElementById("prompt").innerHTML = sessionStorage.getItem("yourPrompt");
 
       var time = 60;
       var countdown;

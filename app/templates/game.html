@@ -61,6 +61,7 @@
       socket.on("sendImage", (nextUser, rCode, prompt) => {
         console.log(uName);
         if(uName === nextUser){
+		sessionStorage.setItem("yourPrompt", prompt);
         	window.location = "game_timer";
         } else {
         	window.location = "game";
