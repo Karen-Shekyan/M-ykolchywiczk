@@ -19,7 +19,7 @@ Go into the repo:<br>
 `cd M-ykolchywiczk`<br><br>
 Install the requirements:<br>
 `pip install -r requirements.txt`<br><br>
-Copypasta Astica API key into `keys/key_api0`<br><br>
+Copypasta [Astica API](https://github.com/stuy-softdev/notes-and-code/blob/main/api_kb/411_on_Astica.md) key into `keys/key_api0`<br><br>
 Start the server:<br>
 `cd app/`<br>
 `python3 __init__.py`
