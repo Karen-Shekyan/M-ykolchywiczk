@@ -1,22 +1,51 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML>
+<html lang="en">
 
-<head>
+  <head>
+    <title> Game </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <link rel="stylesheet" Type="text/css" href="../static/css/home.css">
+    <!-- <script src="../static/js/script.js"></script> -->
+  </head>
 
-</head>
+  <body>
 
-<body>
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div class="col-md-2 bg-secondary text-white">
+          AD SPACE
+        </div>
+        <div class="col-md-8">
+          <br><br><br><br><br>
+          <h3> Dreams of R'lyeh </h3>
+          <br>
 
-<h1>Dreams of R'lyeh</h1>
+          <div id="asking">
+        		<form action="/room" id="pain" method="post">
+        			Username:
+        			<br>
+					<input type=text name="username" required>
+					<input type=text name="roomnumber" hidden>
+					<br><br>
+					<input type=submit class="btn btn-success Create" value="Submit Button">
+        		</form>
+          </div>
+          <br><br><br><br><br><br><br><br><br><br><br>
 
-<form action="/room" id="pain" method="post">
-	<input type=text name="username" required>
-	<br><br>
-	<input type=text name="roomnumber" hidden>
-	<input type=submit class="Create">
-</form>
+          <a href="/" class="btn btn-warning btn-lg" tabindex="-1" role="button" aria-disabled="true"> ⬅ Back </a>
 
+          <br>
+          <br>
 
-</body>
+        </div>
+        <div class="col-md-2 bg-secondary text-white">
+          AD SPACE
+        </div>
+      </div>
+    </div>
+
+  </body>
 
 </html>

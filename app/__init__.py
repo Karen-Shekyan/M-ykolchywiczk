@@ -66,6 +66,7 @@ def game():
 
 @app.route("/game_timer", methods=["POST", "GET"])
 def game_timer():
+    print(session)
     return render_template("game_timer.html")
 
 @socketio.on("getUser")

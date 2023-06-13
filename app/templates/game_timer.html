@@ -19,10 +19,14 @@
     <div class="container">
       <div class="row justify-content-md-center">
         <div class="col-md-2">
-          <div style="background-color: lightgrey; border: 1px solid black; height: 40vh;">
+          <div style="background-color: white; border: 1px solid black; height: 40vh;">
             <br>
             <h4 style="color: black;"> Player List </h4>
-
+            <hr>
+            <center>
+              <table class="table table-striped" style="width: 50%" id="players">
+              </table>
+            </center>
           </div>
           <br>
           <div style="background-color: lightgrey; border: 1px solid black; ">
@@ -32,17 +36,6 @@
               <h4 style="border: 1px solid black; background-color: rgb(220, 220, 220); width: 50%;" id="timer">1:00</h4>
             </center>
             <br>
-            <div class="container">
-              <div class="row">
-                <div class="col">
-                  <button class="btn btn-success" id="start">Start</button>
-                </div>
-                <div class="col">
-                  <button class="btn btn-danger" id="stop">Stop</button>
-                </div>
-              </div>
-            </div>
-            <br><br>
           </div>
         </div>
         <div class="col-md-10">
@@ -74,29 +67,19 @@
       var time = 60;
       var countdown;
 
-      function startTimer() {
-        countdown = setInterval(function() {
-          time--;
-          var seconds = time % 60;
-          var minutes = (time - seconds) / 60;
-          document.getElementById('timer').textContent = minutes + ':' + seconds;
+      countdown = setInterval(function() {
+        time--;
+        var seconds = time % 60;
+        var minutes = (time - seconds) / 60;
+        document.getElementById('timer').textContent = minutes + ':' + seconds;
 
-          if (time <= 0) {
-            clearInterval(countdown);
-            alert('Time is up!');
-          }
-        }, 1000);
+        if (time <= 0) {
+          clearInterval(countdown);
+          alert('Time is up!');
+        }
+      }, 1000);
 
-        document.getElementById('start').disabled = true;
-      }
-
-      function stopTimer() {
-        clearInterval(countdown);
-        document.getElementById('stop').disabled = false;
-      }
-
-      document.getElementById('start').addEventListener('click', startTimer);
-      document.getElementById('stop').addEventListener('click', stopTimer);
+      document.getElementById('start').disabled = true;
     };
 
     document.getElementById("done").addEventListener("click", submit);
@@ -208,6 +191,18 @@
       }
       console.log("pageHTML"); // THIS NEVER PRINTS
       document.getElementById("page").innerHTML = pageHTML;
+    });
+
+    socket.on("listy", (userRooms) => {
+      waitList = userRooms
+      document.getElementById("rooms").innerHTML = userRooms;
+
+      var playersHTML = "<tr><th>#</th><th>Player</th></tr>";
+      for (var i = 0; i < waitList.length; i++) {
+        playersHTML += "<tr> <td>" + (i + 1) + "</td><td>" + waitList[i] + "</td></tr>";
+      }
+      document.getElementById("players").innerHTML = playersHTML;
+      console.log(playersHTML);
     });
 
     </script>
