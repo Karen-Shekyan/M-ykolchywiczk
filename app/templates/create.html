@@ -8,9 +8,22 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <link rel="stylesheet" Type="text/css" href="../static/css/home.css">
     <!-- <script src="../static/js/script.js"></script> -->
+    <style>
+      body {
+          font-family: Arial, sans-serif;
+      }
+      #background {
+          position: fixed;
+          top: 0;
+          left: 0;
+          z-index: -1;
+      }
+    </style>
   </head>
 
   <body>
+
+    <canvas id="background" style="position: absolute;"></canvas>
 
     <div class="container">
       <div class="row justify-content-md-center">
@@ -19,7 +32,7 @@
         </div>
         <div class="col-md-8">
           <br><br><br><br><br>
-          <h3> Dreams of R'lyeh </h3>
+          <h3> <b>Dreams of R'lyeh</b> </h3>
           <br>
 
           <div id="asking">
@@ -45,6 +58,60 @@
         </div>
       </div>
     </div>
+
+    <script>
+      // Get the canvas element
+      var canvas = document.getElementById("background");
+      var ctx = canvas.getContext("2d");
+
+      // Set canvas dimensions to fill the screen
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      // Define line properties
+      var lineSpacing = 50;
+      var lineWidth = 2;
+      var lineSpeed = 1;
+
+      // Array to store line positions
+      var linePositions = [];
+
+      // Initialize line positions
+      for (var i = -canvas.width; i < canvas.width / lineSpacing; i++) {
+          linePositions.push(-i * lineSpacing);
+      }
+
+      function draw() {
+          // Clear the canvas
+          ctx.fillStyle = 'beige';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          // Update line positions
+          for (var i = 0; i < linePositions.length; i++) {
+              // Move lines to the right
+              linePositions[i] += lineSpeed;
+
+              // Reset line position if it goes off the screen
+              if (linePositions[i] > canvas.width) {
+                  linePositions[i] = -canvas.width-lineSpacing;
+              }
+
+              // Draw the line
+              ctx.beginPath();
+              ctx.strokeStyle = "lightgrey";
+              ctx.moveTo(linePositions[i], 0);
+              ctx.lineTo(linePositions[i] + canvas.height * .7, canvas.height);
+              ctx.lineWidth = lineWidth;
+              ctx.stroke();
+          }
+
+          // Request animation frame to continue the animation loop
+          requestAnimationFrame(draw);
+      }
+
+      // Start the animation loop
+      draw();
+    </script>
 
   </body>
 
