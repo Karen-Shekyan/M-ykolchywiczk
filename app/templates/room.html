@@ -88,21 +88,19 @@
     		if (document.getElementById("username").innerHTML === document.getElementById("rooms").innerHTML.split(",")[0]){
       		rCode = document.getElementById("roomnumber").innerHTML;
 
-					sessionStorage.setItem("uName", uName);
-					sessionStorage.setItem("rCode", rCode);
-					sessionStorage.setItem("rooms", waitList);
-
       		socket.emit("startGame", rCode);
     		}
       }
 
       socket.on("redirect", function (data) {
+          sessionStorage.setItem("uName", uName);
+          sessionStorage.setItem("rCode", rCode);
+          sessionStorage.setItem("rooms", waitList);
           if (document.getElementById("username").innerHTML === document.getElementById("rooms").innerHTML.split(",")[0]) {
             window.location = "game_timer";
           } else {
             window.location = data.url;
           }
-
       });
 
   </script>

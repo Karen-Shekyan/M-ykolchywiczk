@@ -13,7 +13,6 @@
   <body>
     <div id="page">
     <h1> Draw! </h1>
-    <h5> Prompt: ... </h5>
     	<div id="prompt"></div>
     <br>
 
@@ -61,9 +60,10 @@
 
     socket.on("sendImage", (nextUser, rCode, prompt) => {
       let pageHTML = "";
+      console.log(uName);
       if (uName = nextUser) {
         pageHTML = `<h1> Draw! </h1>
-                    <h5> Prompt: ... </h5>
+                    <h5> Prompt: `+ prompt + `</h5>
                     <br>
 
                     <div class="container">
@@ -115,7 +115,6 @@
                     <button type="button" class="btn btn-success" id="done"> Done! </button>`;
       } else {
         pageHTML = `<h1> Draw! </h1>
-                    <h5> Prompt: ... </h5>
                       <div id="prompt"></div>
                     <br>
 

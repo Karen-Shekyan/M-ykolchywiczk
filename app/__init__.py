@@ -88,6 +88,12 @@ def endRes(rCode):
             prompt.close()
     emit("results", (retPics, retPrompts))
 
+@socketio.on("reconnect")
+def recon(rCode):
+    print("RECONNECTING...")
+    join_room(rCode)
+    print(rooms())
+
 #Socket method that plays when an image is submitted
 #It will take the user, room, and raw image format.
 #It will create a directory for the room if no directory exists
@@ -112,8 +118,9 @@ def imgageIn(uName, rCode, arrayImage):
     print(rCode, userRooms[rCode])
     if (index == len(userRooms[rCode])):
         print ("Trigger End Room")
-        emit("endGame", rCode)                          ############# HERE #############
-        # emit("endGame", rCode, to = rCode) ### THIS DOESN'T WORK ###
+        print(rooms())
+        # emit("endGame", rCode, callback=print("GOT IT"))                     ############# HERE #############
+        emit("endGame", rCode, to = rCode, callback=print("GOT IT")) ### THIS DOESN'T WORK ###
     else:
         prompt = "PLACEHOLDER"
         #prompt = gen_prompt(imgPath)
@@ -126,6 +133,7 @@ def imgageIn(uName, rCode, arrayImage):
 
         with open(os.path.join("img", rCode, "prompt", uName + ".txt"), 'w') as p:
             p.write(prompt)
+        print(rooms())
         emit("sendImage", (userRooms[rCode][index], rCode, prompt), to = rCode)
     print("??")
 

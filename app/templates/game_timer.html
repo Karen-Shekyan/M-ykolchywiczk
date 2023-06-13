@@ -107,7 +107,6 @@
       //console.log(myImageData.data.toString())
       //socket.emit("submitImg", "tester", "test", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].toString());
       socket.emit("submitImg", uName, rCode, myImageData.data.toString());
-      //does the prompt ever have to go through this?
     }
 
 
@@ -125,6 +124,7 @@
 
     socket.on("sendImage", (nextUser, rCode, prompt) => {
       let pageHTML = "";
+      console.log(uName)
       if (uName = nextUser) {
         pageHTML = `<h1> Draw! </h1>
                     <h5> Prompt: ... </h5>
@@ -206,7 +206,7 @@
                       </div>
                     </div>`;
       }
-      console.log("RAN"); // THIS NEVER PRINTS
+      console.log("pageHTML"); // THIS NEVER PRINTS
       document.getElementById("page").innerHTML = pageHTML;
     });
 

@@ -1,8 +1,11 @@
 //import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
+var socket = io();
 
 uName = sessionStorage.getItem("uName");
 rCode = sessionStorage.getItem("rCode");
 waitList = sessionStorage.getItem("rooms");
+
+console.log(uName,rCode)
 
 // wait for the content of the window element to load, then performs the operations.
 window.addEventListener("load", ()=>{
@@ -19,6 +22,8 @@ window.addEventListener("load", ()=>{
 	window.addEventListener("resize", resize);
   window.addEventListener("resize", resizeC);
   window.addEventListener("resize", loadColors);
+
+	socket.emit("reconnect", rCode);
 });
 
 const canvas = document.getElementById("draw");
