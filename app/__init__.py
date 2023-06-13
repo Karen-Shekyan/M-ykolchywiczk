@@ -163,4 +163,4 @@ def end():
 #             emit("listy", userRooms[room], to = room)
 
 if __name__ == '__main__':
-    socketio.run(app)
+    socketio.run(app, allow_unsafe_werkzeug=True)
