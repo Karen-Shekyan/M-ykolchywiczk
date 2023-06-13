@@ -26,6 +26,7 @@ window.addEventListener("load", ()=>{
   window.addEventListener("resize", loadColors);
 
 	socket.emit("reconnect", rCode);
+	console.log(rCode);
 
   var waitListSplit = waitList.split(',');
 

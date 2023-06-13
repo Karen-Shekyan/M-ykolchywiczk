@@ -104,17 +104,17 @@ def recon(rCode):
     join_room(rCode)
     print(rooms())
 
+@socketio.on("exit")
+def leave(rCode):
+    print(rooms())
+    print(rCode)
+    os.system("rm -rf ./img/" + rCode)
+    emit("leave", {"url": "/"}, to = rCode, callback = print("LEAVING"))
+
 @app.route('/img/<path:path>')
 def serveImg(path):
     return send_from_directory("img", path)
 
-#Socket method that plays when an image is submitted
-#It will take the user, room, and raw image format.
-#It will create a directory for the room if no directory exists
-#It will insert the raw image as a png into the folder for this room, titled as the uesr.
-#It will form an image path for that image.
-#It will generate an AI prompt for the image.
-#It will emit the user, room, path to .png, and prompt for image.
 @socketio.on("submitImg")
 def imgageIn(uName, rCode, arrayImage):
     #print("\n\nHI")
