@@ -60,6 +60,11 @@ karenS -- 2023-06-05 9:00 PM
   - Rename draw.html to game.html and made it more functional
   - Massively overengineered a COLOR PALETTE
 
+gabrielT -- 2023-06-05 10:00 PM
+--------------------------------------------------------------
+ - Created basic templates for game.html, join.html, and room.html pages to connect to flask routes
+============================================================== 
+
 sadiN -- 2023-06-05 11:00 PM
 --------------------------------------------------------------
   - Further work with forms and websockets. Route changes exceed js signal emission, so shenaniganery ensues.
@@ -78,6 +83,12 @@ karenS -- 2023-06-06 3:00 PM
 sadiN -- 2023-06-06 10:00 PM
 --------------------------------------------------------------
   - Finally have a way to reconcile forms and websockets using hidden tags in the HTML and getting that info into the js
+==============================================================
+
+gabrielT -- 2023-06-07 10:00 AM
+--------------------------------------------------------------
+ - Created route for "end.html", wrote "end.html"
+ - Created carousel for the end page, filled it with lorem ipsum
 ==============================================================
 
 karenS -- 2023-06-07 5:00 PM
@@ -106,9 +117,26 @@ sadiN -- 2023-06-09 2:00 AM
 ---------------------------------------------------------------
   - Additional features in waiting room, like users leaving, list of people in rooms, and unable to share names in a room
 
+gabrielT -- 2023-06-09 1:00 PM
+--------------------------------------------------------------
+ - Created game_timer.html page, which is the game.html page but with a timer (for the user who is currently playing)
+==============================================================
+
 brianW -- 2023-06-10 3:40PM
 ---------------------------------------------------------------
   - handled packaging and sending of the entire room's game results
 sadiN -- 2023-06-10 11:00 PM
 ---------------------------------------------------------------
   - Passing info between pages through the js with sessions
+
+gabrielT -- 2023-06-12 8:00 AM
+--------------------------------------------------------------
+ - Fixed waiting room list to have a list of players that updates whenever new players join
+ - Added current list of players to game rooms
+==============================================================
+
+gabrielT -- 2023-06-12 8:00 PM
+--------------------------------------------------------------
+ - Added animated background to website
+ - Rewrote code to show a running list of players
+==============================================================
